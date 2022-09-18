@@ -32,7 +32,7 @@ jobs:
         working-directory: ./ionic
 
       - name: Build Ionic App
-        run: ionic build --prod
+        run: ionic build
         working-directory: ./ionic
 
       - name: Archive Ionic Build
@@ -68,3 +68,83 @@ jobs:
           args: deploy --only hosting:ionic
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }} 
+  deploy_cloud_functions:
+    name: Deploy Cloud Functions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./functions
+
+      - name: Select Firebase Project
+        uses: w9jds/firebase-action@master
+        with:
+          args: use estate
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+      
+      - name: Deploy Firebase environment configurations
+        uses: w9jds/firebase-action@master
+        with:
+          args: functions:config:set 
+            fbprojectconfig.apikey="AIzaSyCusEkXBQLCdQmU4X8FJvRSHIBS_cJEtZA" 
+            fbprojectconfig.authdomain="estate-management-86720.firebaseapp.com" 
+            fbprojectconfig.projectid="estate-management-86720" 
+            fbprojectconfig.storagebucket="estate-management-86720.appspot.com" 
+            fbprojectconfig.messagingsenderid="415222646853" 
+            fbprojectconfig.appid="1:415222646853:web:4756f40f36be440f6f7b2c" 
+            fbprojectconfig.measurementid="G-QJ1BVS7BJQ"  
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only functions --force
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+  deploy_fb_rules:
+    name: Deploy Firebase Rules
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+
+      - name: Select Firebase Project
+        uses: w9jds/firebase-action@master
+        with:
+          args: use estate
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+
+      - name: Deploy database to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only database
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+
+      - name: Deploy storage to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only storage
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+
+      - name: Deploy firestore to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only firestore
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
