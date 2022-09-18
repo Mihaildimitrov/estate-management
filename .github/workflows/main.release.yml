@@ -60,14 +60,14 @@ jobs:
         with:
           args: use estate
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting:ionic
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }} 
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }} 
   deploy_cloud_functions:
     name: Deploy Cloud Functions
     runs-on: ubuntu-latest
@@ -88,7 +88,7 @@ jobs:
         with:
           args: use estate
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       
       - name: Deploy Firebase environment configurations
         uses: w9jds/firebase-action@master
@@ -102,14 +102,14 @@ jobs:
             fbprojectconfig.appid="1:415222646853:web:4756f40f36be440f6f7b2c" 
             fbprojectconfig.measurementid="G-QJ1BVS7BJQ"  
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only functions --force
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
   deploy_fb_rules:
     name: Deploy Firebase Rules
     runs-on: ubuntu-latest
@@ -126,25 +126,25 @@ jobs:
         with:
           args: use estate
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Deploy database to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only database
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Deploy storage to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only storage
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Deploy firestore to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only firestore
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
