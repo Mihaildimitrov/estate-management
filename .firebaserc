@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "estate-management-86720"
+    "estate": "estate-management-86720"
   },
   "targets": {
     "estate-management-86720": {

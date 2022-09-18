@@ -1,0 +1,70 @@
+# This is a basic workflow that is manually triggered
+
+name: ESTATE MANAGEMENT RELEASE
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build_ionic:
+    name: Build Ionic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'             
+
+      - name: Install Ionic CLI
+        run: npm install -g @ionic/cli
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./ionic
+
+      - name: Build Ionic App
+        run: ionic build --prod
+        working-directory: ./ionic
+
+      - name: Archive Ionic Build
+        if: success()
+        uses: actions/upload-artifact@master
+        with:
+          name: ionic-dist
+          path: ./ionic/www
+  deploy_ionic:
+    name: Deploy Ionic
+    needs: build_ionic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: ionic-dist
+          path: ionic-dist
+
+      - name: Select Firebase Project
+        uses: w9jds/firebase-action@master
+        with:
+          args: use estate
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }}
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting:ionic
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESTATE_MANAGEMENT_86720 }} 
