@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "estate-management-86720"
+  },
+  "targets": {
+    "estate-management-86720": {
+      "hosting": {
+        "ionic": [
+          "nextdesign-estate"
+        ]
+      }
+    }
+  }
+}
