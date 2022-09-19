@@ -18,7 +18,7 @@ export class EstateService {
   }
 
   public async getAll(): Promise<IEstate[]> {
-    return (await this.firestore.collection('estate').get()).docs.map(doc => doc.data() as IEstate);
+    return (await this.firestore.collection('estate').orderBy('createAt', 'desc').get()).docs.map(doc => doc.data() as IEstate);
   }
 
   public async getOne(id: string, forceUpdate: boolean = false, setInStore: boolean = true): Promise<IEstate> {

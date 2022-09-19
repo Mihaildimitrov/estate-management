@@ -23,6 +23,10 @@
     <ion-list>
       <ion-item-sliding *ngFor="let estate of estates">
         <ion-item (click)="openEstate(estate.id)">
+          <ion-badge *ngIf="estate.active && !estate.activeSell && !estate.sold" color="tertiary" slot="end"><ion-icon name="hammer-outline"></ion-icon></ion-badge>
+          <ion-badge *ngIf="!estate.active" color="light" slot="end"><ion-icon name="warning-outline"></ion-icon></ion-badge>
+          <ion-badge *ngIf="estate.activeSell" color="success" slot="end"><ion-icon name="rocket-outline"></ion-icon></ion-badge>
+          <ion-badge *ngIf="estate.sold" color="warning" slot="end"><ion-icon name="chevron-down-circle-outline"></ion-icon></ion-badge>
           <ion-label>
             <h1>{{estate.title ? estate.title : estate.id}}</h1>
             <h3>{{estate.address}}</h3>
