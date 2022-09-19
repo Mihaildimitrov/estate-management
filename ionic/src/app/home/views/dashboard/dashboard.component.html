@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button class="hamburger-icon"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">Статистика</ion-title>
+    <ion-buttons class="btn-container" slot="end"></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+  <div *ngIf="loading" class="laoding-container">
+    <ion-spinner name="bubbles"></ion-spinner>
+    <small>Зареждане...</small>
+  </div>
+
+  <div *ngIf="!loading" class="statistics-container">
+    Статистиката ще бъде налична скоро.
+  </div>
+
+</ion-content>

@@ -1,0 +1,27 @@
+<ion-content fullscreen="true">
+
+  <form [formGroup]="form" class="form-container">
+
+    <ion-item>
+      <ion-label position="floating">Имейл</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+      <ion-note slot="helper">Въведи имейл</ion-note>
+      <ion-note *ngIf="form.controls.email.invalid && form.controls.email.touched" slot="error">Невалиден имейл</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Парола</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+      <ion-note slot="helper">Въведи Парола</ion-note>
+      <ion-note *ngIf="form.controls.password.invalid && form.controls.password.touched" slot="error">Невалидна парола</ion-note>
+    </ion-item>
+
+    <ion-button
+      [disabled]="!form.valid"
+      (click)="signin()">
+      Влез
+    </ion-button>
+
+  </form>
+
+</ion-content>

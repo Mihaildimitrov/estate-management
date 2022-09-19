@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button class="hamburger-icon"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">Имоти</ion-title>
+    <ion-buttons class="btn-container" slot="end">
+      <ion-button (click)="openFilters()">
+        <ion-icon name="filter-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+  <div *ngIf="loading" class="laoding-container">
+    <ion-spinner name="bubbles"></ion-spinner>
+    <small>Зареждане...</small>
+  </div>
+
+  <div *ngIf="!loading && estates.length" class="estates-container">
+    <ion-list>
+      <ion-item-sliding *ngFor="let estate of estates">
+        <ion-item (click)="openEstate(estate.id)">
+          <ion-label>
+            <h1>{{estate.title ? estate.title : estate.id}}</h1>
+            <h3>{{estate.address}}</h3>
+            <p>{{estate.description}}</p>
+          </ion-label>
+        </ion-item>
+    
+        <ion-item-options>
+          <ion-item-option (click)="markForSale(estate)" color="success">
+            <ion-icon name="rocket-outline"></ion-icon>
+          </ion-item-option>          
+          <ion-item-option (click)="markAsSold(estate)" color="warning">
+            <ion-icon name="chevron-down-circle-outline"></ion-icon>
+          </ion-item-option>
+          <ion-item-option (click)="remove(estate.id)" color="danger">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <div *ngIf="!loading && !estates.length" class="estates-empty-container">
+    <ion-icon name="business-outline"></ion-icon>
+    <small>
+      Вие все още нямате закупени имоти.
+      <br>
+      Какво чакаш? 
+      <br>
+      Инвестирай СЕГА в недвижими имоти!
+    </small>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" edge slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="createEstate()" color="light">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="createReport()" color="light">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

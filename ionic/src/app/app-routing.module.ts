@@ -1,15 +1,31 @@
+import { GetEstateGuard } from './core/guards/get-estate.guard';
+import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'estate/:estateId',
+    loadChildren: () => import('./estate/estate.module').then(m => m.EstateModule),
+    canActivate: [AuthenticatedGuard, GetEstateGuard]
+  },
+  {
+    path: '',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+    canActivate: [AuthenticatedGuard]
+  },
+  {
+    path: '',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard'
   }
 ];
 
@@ -19,4 +35,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

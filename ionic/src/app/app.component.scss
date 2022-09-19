@@ -85,6 +85,7 @@ ion-menu.ios ion-item {
 }
 
 ion-menu.ios ion-item.selected ion-icon {
+  --ion-color-primary: #FBB55B;
   color: var(--ion-color-primary);
 }
 
@@ -115,5 +116,16 @@ ion-note {
 }
 
 ion-item.selected {
+  --ion-color-primary: #FBB55B;
   --color: var(--ion-color-primary);
+}
+
+.laoding-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  small {}
 }

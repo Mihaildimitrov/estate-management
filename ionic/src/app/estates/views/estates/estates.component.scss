@@ -1,0 +1,42 @@
+ion-button {
+    --color: #FBB55B;
+}
+
+.laoding-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    small {}
+}
+
+.estates-container {}
+
+.estates-empty-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    ion-icon {
+        font-size: 5rem;
+    }
+
+    small {
+        opacity: 0.6;
+        text-align: center;
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+ion-fab {
+    bottom: 1rem;
+
+    ion-fab-button {
+        --background: #FBB55B;
+    }
+}

@@ -1,18 +1,39 @@
+import { AuthenticationService } from './core/services/auth/authentication.service';
+import { UsersStore } from './core/stores/users/users.store';
+import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+
+  public isAuthLoading$: Observable<boolean>;
+  public isAuthenticated$: Observable<boolean>;
+
+  public menuItems = [
+    { title: 'Статистика', url: '/dashboard', icon: 'pie-chart-outline' },
+    { title: 'Имоти', url: '/estates', icon: 'home-outline' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+
+  constructor(
+    private menu: MenuController,
+    private authenticationService: AuthenticationService,
+    public usersStore: UsersStore
+  ) {
+    this.isAuthLoading$ = this.authenticationService.isAuthLoading$;
+    this.isAuthenticated$ = this.authenticationService.isAuthenticated$;
+  }
+
+  ngOnInit() {
+
+  }
+
+  public signOut(): void {
+    this.authenticationService.signOut();
+    this.menu.close();
+  }
+
 }
