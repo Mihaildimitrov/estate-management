@@ -10,6 +10,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: '',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+  },
+  {
     path: 'estate/:estateId',
     loadChildren: () => import('./estate/estate.module').then(m => m.EstateModule),
     canActivate: [AuthenticatedGuard, GetEstateGuard]
@@ -18,10 +22,6 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
     canActivate: [AuthenticatedGuard]
-  },
-  {
-    path: '',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
     path: '**',

@@ -32,8 +32,10 @@ export class AppComponent {
   }
 
   public signOut(): void {
-    this.authenticationService.signOut();
     this.menu.close();
+    setTimeout(() => {
+      this.authenticationService.signOut();
+    }, 500);
   }
 
 }

@@ -26,7 +26,6 @@ export class AuthenticationService {
     this.firestore = Firestore();
 
     this.firebaseAuth.onAuthStateChanged((user) => {
-      console.log(!!user);
       this.usersStore.setUser(user ? JSON.parse(localStorage.getItem('user')) : null);
       this.isAuthenticatedSubject$.next(!!user);
       this.isAuthLoadingSubject$.next(true);

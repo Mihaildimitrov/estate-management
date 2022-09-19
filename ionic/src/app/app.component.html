@@ -15,12 +15,11 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle *ngIf="isAuthenticated$ | async" auto-hide="false" >
-            <ion-item (click)="signOut()" lines="none" detail="false" >
-              <ion-icon slot="start"  name="log-out-outline"></ion-icon>
-              <ion-label>Oтписване</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+   
+          <ion-item *ngIf="isAuthenticated$ | async" (click)="signOut()" lines="none" detail="false" >
+            <ion-icon slot="start"  name="log-out-outline"></ion-icon>
+            <ion-label>Oтписване</ion-label>
+          </ion-item>
 
         </ion-list>
       </ion-content>
