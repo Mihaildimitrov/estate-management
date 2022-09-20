@@ -1,3 +1,5 @@
+import { UsersService } from 'src/app/core/services/users/users.service';
+import { IUserEstate } from './../../../core/models/userEstate.model';
 import { EstateFiltersComponent } from './../../../estate/views/estate-filters/estate-filters.component';
 import { EstateQuickReportComponent } from './../../../estate/views/estate-quick-report/estate-quick-report.component';
 import { Router } from '@angular/router';
@@ -22,6 +24,7 @@ export class EstatesComponent implements OnInit {
     private router: Router,
     private modalCtrl: ModalController,
     private loadingCtrl: LoadingController,
+    private usersService: UsersService,
     private estateService: EstateService,
     private usersStore: UsersStore
   ) { }
@@ -88,9 +91,21 @@ export class EstatesComponent implements OnInit {
       createBy: this.usersStore.userId,
       updateAt: null,
       updateBy: null,
-    }
-
+    };
     const estateEntry = await this.estateService.create(newEstate);
+
+    const newUserEstate: IUserEstate = {
+      id: null,
+      userId: this.usersStore.userId,
+      estateId: estateEntry.id,
+      createAt: ServerTimestamp(),
+      createBy: this.usersStore.userId,
+      updateAt: null,
+      updateBy: null
+    };
+    const userEstateEntry = await this.usersService.addUserToEstate(newUserEstate);
+    this.loadEstates();
+
     loading.dismiss();
     this.router.navigate([`/estate/${estateEntry.id}/dashboard`]);
   }
@@ -106,7 +121,7 @@ export class EstatesComponent implements OnInit {
   }
 
   private async loadEstates(): Promise<void> {
-    this.estates = await this.estateService.getAll();
+    this.estates = await this.estateService.getAllBasedOnUser(this.usersStore.userId);
     this.loading = false;
   }
 

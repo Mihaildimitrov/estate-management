@@ -1,3 +1,4 @@
+import { IUserEstate } from './../../models/userEstate.model';
 import { IEstate } from './../../models/estate.model';
 import { UsersService } from './../users/users.service';
 import { EstateStore } from './../../stores/estate/estate.store';
@@ -15,6 +16,32 @@ export class EstateService {
     private usersService: UsersService
   ) {
     this.firestore = Firestore();
+  }
+
+  public async getAllBasedOnUser(userId: string): Promise<IEstate[]> {
+    const userEstates = [];
+    (await this.firestore.collection('userEstate').where('userId', '==', userId).get()).docs.map(doc => {
+      userEstates.push(doc.data() as IUserEstate);
+    });
+
+    const promises = [];
+    const estates: IEstate[] = [];
+    const estateIds = userEstates.map(e => e.estateId);
+
+    while (estateIds.length) {
+      const chunk = estateIds.splice(0, 10);
+      promises.push(this.firestore.collection('estate').where('id', 'in', chunk).get());
+    }
+
+    const queryAllEstates = await Promise.all(promises);
+    queryAllEstates.map(queryEstateChunk => {
+      queryEstateChunk.docs.map(async doc => {
+        const estate = doc.data() as IEstate;
+        estates.push(estate);
+      });
+    });
+
+    return estates.sort((a, b) => b.createAt - a.createAt);
   }
 
   public async getAll(): Promise<IEstate[]> {

@@ -1,3 +1,4 @@
+import { IUserEstate } from './../../models/userEstate.model';
 import { UsersStore } from './../../stores/users/users.store';
 import { Injectable } from '@angular/core';
 import { Auth, Firestore, IAuth, IFirestore } from 'src/app/firebase';
@@ -31,4 +32,17 @@ export class UsersService {
       return user;
     } catch (error) { throw error; }
   }
+
+  public async addUserToEstate(userEstate: IUserEstate): Promise<IUserEstate> {
+    try {
+      const userEstateDoc = this.firestore.collection('userEstate').doc();
+      userEstate.id = userEstateDoc.id;
+
+      await userEstateDoc.set({ ...userEstate });
+      return userEstate;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 }

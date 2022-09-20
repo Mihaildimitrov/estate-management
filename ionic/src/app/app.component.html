@@ -15,11 +15,16 @@
             </ion-item>
           </ion-menu-toggle>
 
+          <ion-item *ngIf="(serviceWorkerService.isNewVersionAvailable$ | async)" (click)="serviceWorkerService.reloadApp()" detail="false" lines="none">
+            <ion-icon slot="start" [ios]="'refresh-circle-outline'" [md]="'refresh-circle-sharp'"></ion-icon>
+            <ion-label>Обнови приложението</ion-label>
+          </ion-item>
    
           <ion-item *ngIf="isAuthenticated$ | async" (click)="signOut()" lines="none" detail="false" >
             <ion-icon slot="start"  name="log-out-outline"></ion-icon>
             <ion-label>Oтписване</ion-label>
           </ion-item>
+          
 
         </ion-list>
       </ion-content>

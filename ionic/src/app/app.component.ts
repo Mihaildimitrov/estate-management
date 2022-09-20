@@ -1,3 +1,4 @@
+import { ServiceWorkerService } from './core/services/service-worker/service-worker.service';
 import { AuthenticationService } from './core/services/auth/authentication.service';
 import { UsersStore } from './core/stores/users/users.store';
 import { Observable } from 'rxjs';
@@ -20,6 +21,7 @@ export class AppComponent {
 
   constructor(
     private menu: MenuController,
+    public serviceWorkerService: ServiceWorkerService,
     private authenticationService: AuthenticationService,
     public usersStore: UsersStore
   ) {
