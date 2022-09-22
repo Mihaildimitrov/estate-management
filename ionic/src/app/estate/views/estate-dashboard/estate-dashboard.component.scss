@@ -1,0 +1,39 @@
+.laoding-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    small {}
+}
+
+.report-container {
+
+    ion-card {
+        margin: 0.5rem;
+        background: #482121;
+
+        ion-card-subtitle {
+            text-align: center;
+        }
+
+        ion-card-title {
+            text-align: center;
+        }
+    }
+
+    .total-profit-card-container {
+        background: #264b24;
+    }
+
+    .total-invested-card-container {}
+
+    .total-tax-card-container {}
+
+    .total-services-card-container {}
+
+    .total-materials-card-container {}
+}
+
+.charts-container {}

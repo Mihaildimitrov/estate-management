@@ -1,3 +1,4 @@
+import { EstateDetailsComponent } from './views/estate-details/estate-details.component';
 import { EstateMaterialsComponent } from './views/estate-materials/estate-materials.component';
 import { EstateServicesComponent } from './views/estate-services/estate-services.component';
 import { EstateFeesComponent } from './views/estate-fees/estate-fees.component';
@@ -22,6 +23,10 @@ export const estateRoutes: Routes = [
             {
                 path: 'dashboard',
                 component: EstateDashboardComponent
+            },
+            {
+                path: 'details',
+                component: EstateDetailsComponent
             },
             {
                 path: 'fees',

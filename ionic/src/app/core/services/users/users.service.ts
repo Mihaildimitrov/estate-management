@@ -45,4 +45,18 @@ export class UsersService {
     }
   }
 
+  public async removeUserFromEstate(userId: string, estateId: string): Promise<boolean> {
+    try {
+      const userEstateId = (await this.firestore.collection('userEstate')
+        .where('estateId', '==', estateId)
+        .where('userId', '==', userId)
+        .get()).docs[0].id;
+
+      await this.firestore.collection('userEstate').doc(userEstateId).delete();
+      return true
+    } catch (error) {
+      throw error;
+    }
+  }
+
 }

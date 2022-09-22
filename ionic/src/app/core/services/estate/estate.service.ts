@@ -1,3 +1,7 @@
+import { UsersStore } from './../../stores/users/users.store';
+import { IMaterial } from './../../models/material.models';
+import { IService } from './../../models/service.model';
+import { IFee } from './../../models/fee.model';
 import { IUserEstate } from './../../models/userEstate.model';
 import { IEstate } from './../../models/estate.model';
 import { UsersService } from './../users/users.service';
@@ -13,7 +17,8 @@ export class EstateService {
 
   constructor(
     private estateStore: EstateStore,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private usersStore: UsersStore
   ) {
     this.firestore = Firestore();
   }
@@ -83,6 +88,92 @@ export class EstateService {
   public async delete(eventDocId: string): Promise<boolean> {
     try {
       await this.firestore.collection('estate').doc(eventDocId).delete();
+      await this.usersService.removeUserFromEstate(this.usersStore.userId, eventDocId);
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // ===================================
+  // FEES:
+  // ===================================
+
+  public async getAllEstateFees(estateId: string): Promise<IFee[]> {
+    return (await this.firestore.collection(`estate/${estateId}/fees`).orderBy('createAt', 'desc').get()).docs.map(doc => doc.data() as IFee);
+  }
+
+  public async addFee(estateId: string, fee: IFee): Promise<IFee> {
+    try {
+      const preEstateFeeReqDoc = this.firestore.collection(`estate/${estateId}/fees`).doc();
+      fee.id = preEstateFeeReqDoc.id;
+      await preEstateFeeReqDoc.set(fee);
+      return fee;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async deleteFee(estateId: string, feeId: string): Promise<boolean> {
+    try {
+      await this.firestore.collection(`estate/${estateId}/fees`).doc(feeId).delete();
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
+  // ===================================
+  // SERVICES:
+  // ===================================
+
+  public async getAllEstateServices(estateId: string): Promise<IService[]> {
+    return (await this.firestore.collection(`estate/${estateId}/services`).orderBy('createAt', 'desc').get()).docs.map(doc => doc.data() as IService);
+  }
+
+  public async addService(estateId: string, service: IService): Promise<IService> {
+    try {
+      const preEstateFeeReqDoc = this.firestore.collection(`estate/${estateId}/services`).doc();
+      service.id = preEstateFeeReqDoc.id;
+      await preEstateFeeReqDoc.set(service);
+      return service;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async deleteService(estateId: string, serviceId: string): Promise<boolean> {
+    try {
+      await this.firestore.collection(`estate/${estateId}/fees`).doc(serviceId).delete();
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // ===================================
+  // MATERIALS:
+  // ===================================
+
+  public async getAllEstateMaterials(estateId: string): Promise<IMaterial[]> {
+    return (await this.firestore.collection(`estate/${estateId}/materials`).orderBy('createAt', 'desc').get()).docs.map(doc => doc.data() as IMaterial);
+  }
+
+  public async addMaterial(estateId: string, material: IMaterial): Promise<IService> {
+    try {
+      const preEstateFeeReqDoc = this.firestore.collection(`estate/${estateId}/materials`).doc();
+      material.id = preEstateFeeReqDoc.id;
+      await preEstateFeeReqDoc.set(material);
+      return material;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async deleteMateral(estateId: string, materialId: string): Promise<boolean> {
+    try {
+      await this.firestore.collection(`estate/${estateId}/fees`).doc(materialId).delete();
       return true;
     } catch (error) {
       throw error;

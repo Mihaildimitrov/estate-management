@@ -20,7 +20,6 @@ export class GetEstateGuard implements CanActivate, CanActivateChild, CanDeactiv
   ) { }
 
   async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any> {
-    console.log('========================== GET ESTATE GUARD ==========================');
     let currentEstate = this.router.getCurrentNavigation().extras.state ? this.router.getCurrentNavigation().extras.state.estate ? this.router.getCurrentNavigation().extras.state.estate : null : null;
 
     if (!currentEstate) {
@@ -39,6 +38,7 @@ export class GetEstateGuard implements CanActivate, CanActivateChild, CanDeactiv
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    this.estateStore.reset();
     return true;
   }
   canLoad(

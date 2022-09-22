@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button class="hamburger-icon"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">Детайли</ion-title>
+    <ion-buttons class="btn-container" slot="end">
+      <ion-button (click)="save()">
+        <ion-spinner *ngIf="saveLoading" name="bubbles"></ion-spinner>
+        Запази
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+  <div class="charts-container">
+
+  </div>
+
+  <div class="estate-main-form-container">
+
+    <form [formGroup]="form" class="form-container">
+
+      <ion-item-divider><ion-label>За Имота</ion-label></ion-item-divider>
+
+      <ion-item>
+        <ion-label position="floating">Заглавие:</ion-label>
+        <ion-input formControlName="title"></ion-input>
+        <ion-note *ngIf="form.controls.title.invalid && form.controls.title.touched" slot="error">Заглавие е задължително.</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Адрес:</ion-label>
+        <ion-input formControlName="address"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Описание:</ion-label>
+        <ion-textarea formControlName="description" rows="6"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Площ в м2:</ion-label>
+        <ion-input type="number" formControlName="area"></ion-input>
+      </ion-item>
+
+      <ion-item-divider><ion-label>Цени</ion-label></ion-item-divider>
+
+      <ion-item>
+        <ion-label position="floating">Цена за закупуване в ЕВРО:</ion-label>
+        <ion-input type="number" formControlName="buyPrice"></ion-input>
+      </ion-item>
+      <p class="price-per-square">Цена на м2: <b>{{buyPricePerSquare}} евро</b></p>
+
+      <ion-item>
+        <ion-label position="floating">Цена за продажба в ЕВРО:</ion-label>
+        <ion-input type="number" formControlName="soldPrice"></ion-input>
+      </ion-item>
+      <p class="price-per-square">Цена на м2: <b>{{sellPricePerSquare}} евро</b></p>
+
+      <ion-item-divider><ion-label>Статус</ion-label></ion-item-divider>
+      <ion-item>
+        <ion-label>Активен</ion-label>
+        <ion-toggle formControlName="active"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>В продажба</ion-label>
+        <ion-toggle formControlName="activeSell"></ion-toggle>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Продаден</ion-label>
+        <ion-toggle formControlName="sold"></ion-toggle>
+      </ion-item>
+      
+      <ion-item-divider><ion-label>Контакти</ion-label></ion-item-divider>
+
+      <ion-item>
+        <ion-label position="floating">Нотариус:</ion-label>
+        <ion-input formControlName="notary"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Име на домоуправителя:</ion-label>
+        <ion-input formControlName="houseManagerName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Телефон на домоуправителя:</ion-label>
+        <ion-input formControlName="houseManagerPhone"></ion-input>
+      </ion-item>
+
+    </form>
+
+  </div>
+
+  <div class="estate-team-container">
+    
+  </div>
+
+</ion-content>

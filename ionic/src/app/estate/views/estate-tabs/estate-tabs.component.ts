@@ -9,6 +9,6 @@ export class EstateTabsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

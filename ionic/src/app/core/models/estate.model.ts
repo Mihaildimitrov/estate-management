@@ -12,6 +12,13 @@ export interface IEstate {
     notary: string;
     houseManagerName: string;
     houseManagerPhone: number;
+
+    notaryBuyTax: number;
+    notarySellTax: number;
+    brokerCommissionPercentages: number;
+    brokerBuyCommission: number;
+    brokerSellCommission: number;
+
     createAt: any;
     createBy: any;
     updateAt: any;

@@ -2,7 +2,7 @@ import { UsersService } from 'src/app/core/services/users/users.service';
 import { IUserEstate } from './../../../core/models/userEstate.model';
 import { EstateFiltersComponent } from './../../../estate/views/estate-filters/estate-filters.component';
 import { EstateQuickReportComponent } from './../../../estate/views/estate-quick-report/estate-quick-report.component';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { EstateService } from './../../../core/services/estate/estate.service';
 import { UsersStore } from './../../../core/stores/users/users.store';
 import { IEstate } from './../../../core/models/estate.model';
@@ -27,11 +27,23 @@ export class EstatesComponent implements OnInit {
     private usersService: UsersService,
     private estateService: EstateService,
     private usersStore: UsersStore
-  ) { }
+  ) {
+
+    this.router.events.subscribe(async (e) => {
+      if (e instanceof NavigationEnd) {
+        const url = e.urlAfterRedirects;
+
+        if (url === '/estates') {
+          this.loading = true;
+          await this.loadEstates();
+        }
+      }
+    });
+
+  }
 
   async ngOnInit(): Promise<void> {
     await this.loadEstates();
-    console.log(this.estates);
   }
 
   public openEstate(id: string) {
@@ -87,6 +99,11 @@ export class EstatesComponent implements OnInit {
       notary: null,
       houseManagerName: null,
       houseManagerPhone: null,
+      notaryBuyTax: null,
+      notarySellTax: null,
+      brokerCommissionPercentages: 2.5,
+      brokerBuyCommission: null,
+      brokerSellCommission: null,
       createAt: ServerTimestamp(),
       createBy: this.usersStore.userId,
       updateAt: null,

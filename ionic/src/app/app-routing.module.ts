@@ -16,7 +16,8 @@ const routes: Routes = [
   {
     path: 'estate/:estateId',
     loadChildren: () => import('./estate/estate.module').then(m => m.EstateModule),
-    canActivate: [AuthenticatedGuard, GetEstateGuard]
+    canActivate: [AuthenticatedGuard, GetEstateGuard],
+    canDeactivate: [GetEstateGuard]
   },
   {
     path: '',
