@@ -75,9 +75,26 @@
         <ion-label>Продаден</ion-label>
         <ion-toggle formControlName="sold"></ion-toggle>
       </ion-item>
-      
-      <ion-item-divider><ion-label>Контакти</ion-label></ion-item-divider>
 
+      <ion-item-divider><ion-label>Такси</ion-label></ion-item-divider>
+
+      <ion-item>
+        <ion-label position="floating">Нотариални такси покупка:</ion-label>
+        <ion-input type="number" formControlName="notaryBuy"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Брокер комисионна покупка:</ion-label>
+        <ion-input type="number" formControlName="brokerBuy"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Брокер комисионна продажба:</ion-label>
+        <ion-input type="number" formControlName="brokerSell"></ion-input>
+      </ion-item>
+
+      <ion-item-divider><ion-label>Контакти</ion-label></ion-item-divider>
+      
       <ion-item>
         <ion-label position="floating">Нотариус:</ion-label>
         <ion-input formControlName="notary"></ion-input>
@@ -92,6 +109,8 @@
         <ion-label position="floating">Телефон на домоуправителя:</ion-label>
         <ion-input formControlName="houseManagerPhone"></ion-input>
       </ion-item>
+
+      
 
     </form>
 

@@ -53,7 +53,10 @@ export class EstateDetailsComponent implements OnInit {
       sold: new FormControl(this.estate ? this.estate.sold : null, null),
       notary: new FormControl(this.estate ? this.estate.notary : null, null),
       houseManagerName: new FormControl(this.estate ? this.estate.houseManagerName : null, null),
-      houseManagerPhone: new FormControl(this.estate ? this.estate.houseManagerPhone : null, null)
+      houseManagerPhone: new FormControl(this.estate ? this.estate.houseManagerPhone : null, null),
+      notaryBuy: new FormControl(this.estate ? this.estate.notaryBuyTax : null, null),
+      brokerBuy: new FormControl(this.estate ? this.estate.brokerBuyCommission : null, null),
+      brokerSell: new FormControl(this.estate ? this.estate.brokerSellCommission : null, null),
     });
   }
 
@@ -82,10 +85,10 @@ export class EstateDetailsComponent implements OnInit {
         notary: form.notary,
         houseManagerName: form.houseManagerName,
         houseManagerPhone: form.houseManagerPhone,
-        notaryBuyTax: Math.trunc((estateBuyPriceInLeva / 100) * 4.5),
+        notaryBuyTax: form.notaryBuy ? form.notaryBuy : Math.trunc((estateBuyPriceInLeva / 100) * 4.5),
         notarySellTax: Math.trunc((estateSellPriceInLeva / 100) * 4.5),
-        brokerBuyCommission: Math.trunc((estateBuyPriceInLeva / 100) * this.estate.brokerCommissionPercentages),
-        brokerSellCommission: Math.trunc((estateSellPriceInLeva / 100) * this.estate.brokerCommissionPercentages),
+        brokerBuyCommission: form.brokerBuy ? form.brokerBuy : Math.trunc((estateBuyPriceInLeva / 100) * this.estate.brokerCommissionPercentages),
+        brokerSellCommission: form.brokerSell ? form.brokerSell : Math.trunc((estateSellPriceInLeva / 100) * this.estate.brokerCommissionPercentages),
       }
       await this.estateService.update(this.estate.id, estatePayload);
       this.estateStore.setEstate(estatePayload);
