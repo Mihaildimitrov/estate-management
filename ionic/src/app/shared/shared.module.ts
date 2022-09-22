@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MobxAngularModule } from 'mobx-angular';
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MobxAngularModule } from 'mobx-angular';
     ReactiveFormsModule,
     MobxAngularModule,
     RouterModule,
-    SwiperModule
+    SwiperModule,
+    ChartModule
   ],
   exports: [
     IonicModule,
@@ -27,7 +29,8 @@ import { MobxAngularModule } from 'mobx-angular';
     ReactiveFormsModule,
     MobxAngularModule,
     RouterModule,
-    SwiperModule
+    SwiperModule,
+    ChartModule
   ]
 })
 export class SharedModule { }

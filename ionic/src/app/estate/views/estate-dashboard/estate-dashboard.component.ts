@@ -10,6 +10,7 @@ import { UsersService } from './../../../core/services/users/users.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-estate-dashboard',
   templateUrl: './estate-dashboard.component.html',
@@ -18,6 +19,8 @@ import { Component, OnInit } from '@angular/core';
 export class EstateDashboardComponent implements OnInit {
 
   public loading = true;
+  public pieChartData: any;
+
 
   public get estate(): IEstate {
     return this.estateStore.estate
@@ -69,6 +72,7 @@ export class EstateDashboardComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await Promise.all([this.loadFees(), this.loadMaterials(), this.loadServices()]);
+    this.generatePieChartData();
     this.loading = false;
   }
 
@@ -136,5 +140,27 @@ export class EstateDashboardComponent implements OnInit {
     this.estateStore.setTotalServices(totalServices);
   }
 
+  private generatePieChartData() {
+    this.pieChartData = {
+      labels: ['Покупка', 'Такси', 'Услуги', 'Материали'],
+      datasets: [
+        {
+          data: [(this.estate.buyPrice * 1.96), this.totalFees, this.totalServices, this.totalMaterials],
+          backgroundColor: [
+            "#141111",
+            "#eb445a",
+            "#50c8ff",
+            "#fbb55b",
+          ],
+          hoverBackgroundColor: [
+            "#141111",
+            "#eb445a",
+            "#50c8ff",
+            "#fbb55b",
+          ]
+        }
+      ]
+    };
+  }
 
 }
