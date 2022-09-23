@@ -15,8 +15,128 @@
     <small>Зареждане...</small>
   </div>
 
-  <div *ngIf="!loading" class="statistics-container">
-    Статистиката ще бъде налична скоро.
+  <div *ngIf="!loading" class="report-container">
+    <ion-grid>
+
+      <ion-row>
+        <ion-col>
+          <h3>Всички имоти:</h3>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card class="total-profit-card-container">
+            <ion-card-header>
+              <ion-card-subtitle>ПЕЧАЛБА <small>/ лв</small></ion-card-subtitle>
+              <ion-card-title>{{totalProfit}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-card class="total-invested-card-container">
+            <ion-card-header>
+              <ion-card-subtitle>Всичко <small>/ лв</small></ion-card-subtitle>
+              <ion-card-title>{{totalInvested}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="total-tax-card-container">
+            <ion-card-header>
+              <ion-card-subtitle>Такси <small>/ лв</small></ion-card-subtitle>
+              <ion-card-title>{{totalFees}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-card class="total-services-card-container">
+            <ion-card-header>
+              <ion-card-subtitle>Услуги <small>/ лв</small></ion-card-subtitle>
+              <ion-card-title>{{totalServices}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="total-materials-card-container">
+            <ion-card-header>
+              <ion-card-subtitle>Материали <small>/ лв</small></ion-card-subtitle>
+              <ion-card-title>{{totalMaterials}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      
+      <div *ngIf="!loading" class="charts-container">
+        <p-chart type="pie" [data]="pieChartData"></p-chart>
+      </div>
+
+      <ion-row>
+        <ion-col>
+          <h3>Продадени имоти:</h3>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card class="total-profit-card-container">
+            <ion-card-header>
+              <ion-card-subtitle>ПЕЧАЛБА <small>/ лв</small></ion-card-subtitle>
+              <ion-card-title>{{totalSellProfit}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-card class="total-invested-card-container">
+            <ion-card-header>
+              <ion-card-subtitle>Всичко <small>/ лв</small></ion-card-subtitle>
+              <ion-card-title>{{totalSellInvested}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="total-tax-card-container">
+            <ion-card-header>
+              <ion-card-subtitle>Такси <small>/ лв</small></ion-card-subtitle>
+              <ion-card-title>{{totalSellFees}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-card class="total-services-card-container">
+            <ion-card-header>
+              <ion-card-subtitle>Услуги <small>/ лв</small></ion-card-subtitle>
+              <ion-card-title>{{totalSellServices}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="total-materials-card-container">
+            <ion-card-header>
+              <ion-card-subtitle>Материали <small>/ лв</small></ion-card-subtitle>
+              <ion-card-title>{{totalSellMaterials}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+
+  <div *ngIf="!loading" class="charts-container">
+    <p-chart type="pie" [data]="pieChartDataSell"></p-chart>
   </div>
 
 </ion-content>
