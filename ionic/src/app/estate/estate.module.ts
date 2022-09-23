@@ -1,3 +1,4 @@
+import { EstateNotesComponent } from './views/estate-notes/estate-notes.component';
 import { EstateDetailsComponent } from './views/estate-details/estate-details.component';
 import { EstateFiltersComponent } from './views/estate-filters/estate-filters.component';
 import { EstateQuickReportComponent } from './views/estate-quick-report/estate-quick-report.component';
@@ -23,7 +24,8 @@ import { CommonModule } from '@angular/common';
     EstateMaterialsComponent,
     EstateQuickReportComponent,
     EstateFiltersComponent,
-    EstateDetailsComponent
+    EstateDetailsComponent,
+    EstateNotesComponent
   ],
   imports: [
     CommonModule,

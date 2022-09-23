@@ -5,3 +5,11 @@ ion-tab-button {
 ion-button {
     --color: inherit;
 }
+
+ion-fab {
+    bottom: 4rem;
+
+    ion-fab-button {
+        --background: #FBB55B;
+    }
+}
