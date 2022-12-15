@@ -6,4 +6,5 @@ export interface IMaterial {
     createBy: any;
     updateAt: any;
     updateBy: any;
+    dateAdded?: any;
 }

@@ -8,6 +8,8 @@ import { EstateStore } from './../../../core/stores/estate/estate.store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IMaterial } from './../../../core/models/material.models';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
+import { parseToMoment } from 'src/app/shared/helpers/moment';
 
 @Component({
   selector: 'app-estate-materials',
@@ -76,13 +78,18 @@ export class EstateMaterialsComponent implements OnInit {
 
   private async loadMaterials() {
     const materials = await this.estateService.getAllEstateMaterials(this.estate.id);
+    let totalMaterials = 0;
+    materials.map(m => {
+      totalMaterials += m.cost;
+      m.dateAdded = parseToMoment(m.createAt).format('DD.MM');
+    });
+
     this.estateStore.setMaterials(materials);
 
-    let totalMaterials = 0;
-    materials.map(m => totalMaterials += m.cost);
     this.estateStore.setTotalMaterials(totalMaterials);
 
     this.materialsLoading = false;
   }
 
 }
+

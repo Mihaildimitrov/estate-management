@@ -8,6 +8,7 @@ import { IEstate } from './../../../core/models/estate.model';
 import { IService } from './../../../core/models/service.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { parseToMoment } from '../../../shared/helpers/moment';
 
 @Component({
   selector: 'app-estate-services',
@@ -76,10 +77,14 @@ export class EstateServicesComponent implements OnInit {
 
   private async loadServices() {
     const services = await this.estateService.getAllEstateServices(this.estate.id);
-    this.estateStore.setServices(services);
-
+    
     let totalServices = 0;
-    services.map(m => totalServices += m.cost);
+    services.map(m => {
+      totalServices += m.cost;
+      m.dateAdded = parseToMoment(m.createAt).format('DD.MM');
+    });
+    
+    this.estateStore.setServices(services);
     this.estateStore.setTotalServices(totalServices);
 
     this.servicesLoading = false;

@@ -8,6 +8,7 @@ import { UsersStore } from './../../../core/stores/users/users.store';
 import { EstateStore } from './../../../core/stores/estate/estate.store';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { parseToMoment } from '../../../shared/helpers/moment';
 
 @Component({
   selector: 'app-estate-fees',
@@ -76,6 +77,7 @@ export class EstateFeesComponent implements OnInit {
 
   private async loadFees() {
     const feesDb = await this.estateService.getAllEstateFees(this.estate.id);
+    feesDb.map(f => f.dateAdded = parseToMoment(f.createAt).format('DD.MM'));
     const fees = this.getEstateMainFees().concat(feesDb);
     this.estateStore.setFees(fees);
 

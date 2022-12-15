@@ -6,4 +6,5 @@ export interface IFee {
     createBy: any;
     updateAt: any;
     updateBy: any;
+    dateAdded?: any;
 }

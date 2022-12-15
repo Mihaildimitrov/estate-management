@@ -6,4 +6,5 @@ export interface IService {
     createBy: any;
     updateAt: any;
     updateBy: any;
+    dateAdded?: any;
 }
