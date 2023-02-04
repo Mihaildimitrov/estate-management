@@ -68,8 +68,8 @@ export class EstateDetailsComponent implements OnInit {
     if (this.form.valid) {
       this.saveLoading = true;
       const form = this.form.value;
-      const estateBuyPriceInLeva = 1.96 * form.buyPrice;
-      const estateSellPriceInLeva = 1.96 * form.soldPrice;
+      const estateBuyPriceInLeva = 1.95583 * form.buyPrice;
+      const estateSellPriceInLeva = 1.95583 * form.soldPrice;
 
       const estatePayload: IEstate = {
         ... this.estate,

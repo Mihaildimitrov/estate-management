@@ -28,12 +28,12 @@ export class EstateDashboardComponent implements OnInit {
 
 
   public get totalInvested(): number {
-    return (this.estate.buyPrice * 1.96) + this.totalFees + this.totalMaterials + this.totalServices;
+    return (this.estate.buyPrice * 1.95583) + this.totalFees + this.totalMaterials + this.totalServices;
   }
 
 
   public get totalProfit(): number {
-    return (this.estate.soldPrice * 1.96) - this.totalInvested;
+    return (this.estate.soldPrice * 1.95583) - this.totalInvested;
   }
 
 
@@ -145,7 +145,7 @@ export class EstateDashboardComponent implements OnInit {
       labels: ['Покупка', 'Такси', 'Услуги', 'Материали'],
       datasets: [
         {
-          data: [(this.estate.buyPrice * 1.96), this.totalFees, this.totalServices, this.totalMaterials],
+          data: [(this.estate.buyPrice * 1.95583), this.totalFees, this.totalServices, this.totalMaterials],
           backgroundColor: [
             "#141111",
             "#eb445a",

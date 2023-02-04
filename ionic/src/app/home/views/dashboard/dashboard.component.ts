@@ -86,8 +86,8 @@ export class DashboardComponent implements OnInit {
 
     await Promise.all(this.estates.map(async estate => {
 
-      if (estate.sold) this.totalSellBuy += (estate.buyPrice * 1.96);
-      this.totalBuy += (estate.buyPrice * 1.96);
+      if (estate.sold) this.totalSellBuy += (estate.buyPrice * 1.95583);
+      this.totalBuy += (estate.buyPrice * 1.95583);
 
       // FEES:
       let estateTotalFees = 0;
@@ -117,8 +117,8 @@ export class DashboardComponent implements OnInit {
         estateTotalMaterials += m.cost;
       });
 
-      const estateTotalInvest = (estate.buyPrice * 1.96) + estateTotalFees + estateTotalMaterials + estateTotalServices;
-      const estateProfit = (estate.soldPrice * 1.96) - estateTotalInvest;
+      const estateTotalInvest = (estate.buyPrice * 1.95583) + estateTotalFees + estateTotalMaterials + estateTotalServices;
+      const estateProfit = (estate.soldPrice * 1.95583) - estateTotalInvest;
 
       if (estate.sold) {
         this.totalSellInvested += estateTotalInvest;
